@@ -11,10 +11,7 @@ const encoder = bodyParser.urlencoded();
 //라우터
 const adminLoginRouter = require('./src/routes/home/index');
 
-
 const connection = require('./src/models/dbmodel/db');
-const session = require('./src/models/dbmodel/session');
-const adminLogin = require('./src/models/adminlogin');
 const protectLogin = require('./src/models/protectlogin');
 
 
@@ -40,8 +37,7 @@ app.use(express.static(`${__dirname}/src/public`));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use("/", home); // use -> 미들웨어 등록해주는 메소드.
-app.use(session);
+app.use("/", home);
 
 connection.connect((err)=>{
     if (err) throw err;
@@ -50,7 +46,7 @@ connection.connect((err)=>{
 
 
 //관리자 로그인
-app.use('/',encoder, adminLogin, adminLoginRouter);
+app.use('/admin', encoder, adminLoginRouter);
 
 //보호자 로그인
 app.post("/index_p",encoder, protectLogin);

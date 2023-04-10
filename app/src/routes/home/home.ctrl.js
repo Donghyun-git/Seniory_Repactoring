@@ -4,6 +4,9 @@ const output = {
     index: (req, res) => {
         res.render("home/index");
     },
+    list: (req, res) => {
+        res.render("home/list");
+    },
     signup: (req, res) => {
         res.render("home/signup");
     },
@@ -40,11 +43,11 @@ const output = {
 };
 
 const process = {
-  list: (req, res) => {
-    res.render("home/list");
-  },
-};
-
+    index: (req, res) => {
+        console.log(req.session.info);
+        res.render("home/admin");
+    }
+}
 
 
 module.exports = {

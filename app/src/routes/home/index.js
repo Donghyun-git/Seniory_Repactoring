@@ -1,17 +1,17 @@
 "use strict";
-
-
 const express = require("express");
 const router = express.Router();
-
+const session = require('../../models/dbmodel/session');
+const adminLoginRequest = require("../../models/adminlogin");
 const ctrl = require("./home.ctrl");
 const user = require("./user2.ctrl");
 
+router.use(session);
+
 // 관리자
 router.get("/", ctrl.output.index);
+router.post('/admin', adminLoginRequest, ctrl.process.index);
 
-//로그인 처리 후
-router.post("/", ctrl.process.list);
 
 router.get("/signup", ctrl.output.signup);
 router.get("/calender", ctrl.output.calender);

@@ -24,7 +24,8 @@ let signUp = document.querySelector('.sign-up');
 		loginBtn2 = document.querySelector('#login-button2');
 
 	let radioArea = document.getElementById("rdo_area");
-	
+
+
 	function radio(event) {
 		radioArea.innerText = event.target.value;
 		console.log(radioArea.textContent)
