@@ -11,6 +11,7 @@ const encoder = bodyParser.urlencoded();
 const connection = require('./src/models/dbmodel/db');
 const session = require('./src/models/dbmodel/session');
 const adminLogin = require('./src/models/adminlogin');
+const protectLogin = require('./src/models/protectlogin');
 
 
 const patientjson = require('/Users/ddongs/Desktop/portfolio/Capstone_re/app/patient.json')
@@ -45,40 +46,14 @@ connection.connect((error)=>{
 
 
 //관리자 로그인
-app.post("/",encoder, adminLogin, ()=>{
-    console.log("세션입니다:", req.session);
+app.post("/",encoder, adminLogin, (req, res)=>{
+    console.log("관리자 로그인 세션:", req.session);
 });
 
-
 //보호자 로그인
-app.post("/index_p",encoder, function(req, res){
-    const center = req.body.center;
-    const id = req.body.id;
-    const pw = req.body.pw;
-    
-    connection.query('select center, id, pw, name, silverName, phoneNum from protect where center = ? and id = ? and pw = ?;',[center, id, pw], function(error, results, fields) {
-
-        if(error) throw error
-            if (results.length > 0){
-                 for(let i=0; i<results.length; i++){
-                    if(results[i] !==undefined){
-                        req.session.name = results[i].name;
-                        req.session.sname = results[i].silverName;
-                        req.session.pnum = results[i].phoneNum;
-                        req.session.isLogined = true;
-                        req.session.save(() => {
-                            res.redirect('/mypage_p1');
-                        });
-                    }
-                }
-            } else {
-                res.send(`<script>alert('로그인에 실패하였습니다! 사용자 정보를 다시 확인해주세요!');
-                location.href='/index_p'</script>`);
-            }
-        });
-
-
- });
+app.post("/index_p",encoder, protectLogin, (req, res)=>{
+    console.log("보호자 로그인 세션:", req.session);
+});
 
 //관리사 회원가입
 app.post("/signup", encoder, function(req, res){
@@ -1622,7 +1597,7 @@ app.get('/mypage1', function(req, res){
     let output = "";
     connection.query(`SELECT * FROM user WHERE name = "${req.session.name}"`, function(error, results, fields){
         if (error) throw error
-        console.log(results);
+        console.log("관리자 마이페이지 접속 쿼리 결과:", results);
         output += `
         <!DOCTYPE HTML>
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -1943,7 +1918,7 @@ app.get('/deletelist1', function(req, res){
 //로그인 성공(보호자)
 app.get("/mypage_p1", function(req, res){
     let output ="";
-    console.log(req.session);
+    console.log("보호자 로그인 성공 세션:", req.session);
     if(req.session.name && req.session.sname && req.session.pnum){
         output += `<!DOCTYPE HTML>
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -2326,7 +2301,6 @@ app.get("/logout", function(req, res) {
     req.session.save(() => {
         res.redirect('/');
     });
-    console.log(session);
 });
 
 
