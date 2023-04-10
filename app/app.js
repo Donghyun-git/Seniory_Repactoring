@@ -8,6 +8,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const encoder = bodyParser.urlencoded();
 
+//라우터
+const adminLoginRouter = require('./src/routes/home/index');
+
+
 const connection = require('./src/models/dbmodel/db');
 const session = require('./src/models/dbmodel/session');
 const adminLogin = require('./src/models/adminlogin');
@@ -39,21 +43,17 @@ app.use(express.urlencoded({extended: true}));
 app.use("/", home); // use -> 미들웨어 등록해주는 메소드.
 app.use(session);
 
-connection.connect((error)=>{
-    if (error) throw error;
+connection.connect((err)=>{
+    if (err) throw err;
     console.log("connected");
 });
 
 
 //관리자 로그인
-app.post("/",encoder, adminLogin, (req, res)=>{
-    console.log("관리자 로그인 세션:", req.session);
-});
+app.use('/',encoder, adminLogin, adminLoginRouter);
 
 //보호자 로그인
-app.post("/index_p",encoder, protectLogin, (req, res)=>{
-    console.log("보호자 로그인 세션:", req.session);
-});
+app.post("/index_p",encoder, protectLogin);
 
 //관리사 회원가입
 app.post("/signup", encoder, function(req, res){
@@ -184,213 +184,113 @@ app.post("/signup_p", encoder, function(req, res){
 
 
 //로그인 성공(관리자)
-app.get("/list1", function(req, res){
-    let output = "";
-    let list ="";
-    let list1 = "";
-    if(req.session.name && req.session.info && req.session.workCount){
-        let info = req.session.info;
-        let json = JSON.stringify(info);
-        let parseData = JSON.parse(json);
-        for(let i=0; i<parseData.length; i++){
-            fs.writeFileSync('patient.json', json);
-        }
-        connection.query(`SELECT * FROM patient WHERE shareName != '${req.session.name}';`, function(error, results, fields){
-            let json = JSON.stringify(results);
-            for(let i=0; i<results.length; i++){
-               fs.writeFileSync('share.json', json);
-            }
-        });
+// app.get("/list1", function(req, res){
+//     let output = "";
+//     let list ="";
+//     let list1 = "";
+//     if(req.session.name && req.session.info && req.session.workCount){
+//         let info = req.session.info;
+//         let json = JSON.stringify(info);
+//         let parseData = JSON.parse(json);
+//         for(let i=0; i<parseData.length; i++){
+//             fs.writeFileSync('patient.json', json);
+//         }
+//         connection.query(`SELECT * FROM patient WHERE shareName != '${req.session.name}';`, function(error, results, fields){
+//             let json = JSON.stringify(results);
+//             for(let i=0; i<results.length; i++){
+//                fs.writeFileSync('share.json', json);
+//             }
+//         });
         
         
-        for(let i=0; i<2; i++){
-            if(parseData[i].list.todo == null){
-               list += `
-               <li class="list-item">
-                                <a href="/detail1?id=${parseData[i].id}" class="list-item__link">
-                                    <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
-                                    <div class="list-item__text">
-                                        <h5><b>${parseData[i].info.pname}</b>어르신</h5>
-                                        <p>${parseData[i].info.padr} / ${parseData[i].info.page} / ${parseData[i].info.sex}</p>
-                                    </div>
-                                    <ul class="list-item__todo">
-                                        <li><span>등록된 데이터가 없습니다</span></li>
-                                    </ul>
-                                </a>
-                                <a href="tel:010-8300-7586" class="list-item__tel">전화걸기</a>
-                            </li>`;
-            } else {
-               list += `
-            <li class="list-item">
-                                <a href="/detail1?id=${parseData[i].id}" class="list-item__link">
-                                    <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
-                                    <div class="list-item__text">
-                                        <h5><b>${parseData[i].info.pname}</b>어르신</h5>
-                                        <p>${parseData[i].info.padr} / ${parseData[i].info.page} / ${parseData[i].info.sex}</p>
-                                    </div>
-                                    <ul class="list-item__todo">
-                                        <li><span>${parseData[i].list.todo}</span></li>
-                                    </ul>
-                                </a>
-                                <a href="tel:010-8300-7586" class="list-item__tel">전화걸기</a>
-                            </li>`; 
-            }
+//         for(let i=0; i<2; i++){
+//             if(parseData[i].list.todo == null){
+//                list += `
+//                <li class="list-item">
+//                                 <a href="/detail1?id=${parseData[i].id}" class="list-item__link">
+//                                     <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
+//                                     <div class="list-item__text">
+//                                         <h5><b>${parseData[i].info.pname}</b>어르신</h5>
+//                                         <p>${parseData[i].info.padr} / ${parseData[i].info.page} / ${parseData[i].info.sex}</p>
+//                                     </div>
+//                                     <ul class="list-item__todo">
+//                                         <li><span>등록된 데이터가 없습니다</span></li>
+//                                     </ul>
+//                                 </a>
+//                                 <a href="tel:010-8300-7586" class="list-item__tel">전화걸기</a>
+//                             </li>`;
+//             } else {
+//                list += `
+//             <li class="list-item">
+//                                 <a href="/detail1?id=${parseData[i].id}" class="list-item__link">
+//                                     <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
+//                                     <div class="list-item__text">
+//                                         <h5><b>${parseData[i].info.pname}</b>어르신</h5>
+//                                         <p>${parseData[i].info.padr} / ${parseData[i].info.page} / ${parseData[i].info.sex}</p>
+//                                     </div>
+//                                     <ul class="list-item__todo">
+//                                         <li><span>${parseData[i].list.todo}</span></li>
+//                                     </ul>
+//                                 </a>
+//                                 <a href="tel:010-8300-7586" class="list-item__tel">전화걸기</a>
+//                             </li>`; 
+//             }
             
-         }
-         connection.query(`SELECT * from patient where shareName != "${req.session.name}";`, function(error, results, fields){
-            if(error) throw error;
-            if(results.length == 0){
-                list1 += `
-                <h5 class="mt30" style="text-align: center; font-size: 18px; font-weight: 400;">인수인계 사항이 없습니다!</h5>`
-            } else {
-                for(let i=0; i<2; i++){
-                console.log(results[i].pname);
-                if(results[i].todo == null){
-                    list1 +=`
-                    <li class="list-item">
-                    <a href="/detail2?id=${results[i].shareID}" class="list-item__link">
-                        <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
-                        <div class="list-item__text">
-                            <h5><b>${results[i].pname}</b>어르신</h5>
-                            <p>${results[i].padr} / ${results[i].page} / ${results[i].sex}</p>
-                        </div>
-                        <ul class="list-item__todo">
-                            <li><span>등록된 데이터가 없습니다</span></li>
-                        </ul>
-                    </a>
-                    <a href="#" class="list-item__tel">전화걸기</a>
-                </li>
-                    `
-                } else {
-                    list1 += `
-            <li class="list-item">
-                                <a href="/detail2?id=${results[i].shareID}" class="list-item__link">
-                                    <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
-                                    <div class="list-item__text">
-                                        <h5><b>${results[i].pname}</b>어르신</h5>
-                                        <p>${results[i].padr} / ${results[i].page} / ${results[i].sex}</p>
-                                    </div>
-                                    <ul class="list-item__todo">
-                                        <li><span>${results[i].todo}</span></li>
-                                    </ul>
-                                </a>
-                                <a href="#" class="list-item__tel">전화걸기</a>
-                            </li>`;
-                        }
+//          }
+//          connection.query(`SELECT * from patient where shareName != "${req.session.name}";`, function(error, results, fields){
+//             if(error) throw error;
+//             if(results.length == 0){
+//                 list1 += `
+//                 `
+//             } else {
+//                 for(let i=0; i<2; i++){
+//                 console.log(results[i].pname);
+//                 if(results[i].todo == null){
+//                     list1 +=`
+//                     <li class="list-item">
+//                     <a href="/detail2?id=${results[i].shareID}" class="list-item__link">
+//                         <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
+//                         <div class="list-item__text">
+//                             <h5><b>${results[i].pname}</b>어르신</h5>
+//                             <p>${results[i].padr} / ${results[i].page} / ${results[i].sex}</p>
+//                         </div>
+//                         <ul class="list-item__todo">
+//                             <li><span>등록된 데이터가 없습니다</span></li>
+//                         </ul>
+//                     </a>
+//                     <a href="#" class="list-item__tel">전화걸기</a>
+//                 </li>
+//                     `
+//                 } else {
+//                     list1 += `
+//             <li class="list-item">
+//                                 <a href="/detail2?id=${results[i].shareID}" class="list-item__link">
+//                                     <em class="list-item__thumb" style="background:url('../../img/profile_sample.jpg')no-repeat center center / cover;"></em>
+//                                     <div class="list-item__text">
+//                                         <h5><b>${results[i].pname}</b>어르신</h5>
+//                                         <p>${results[i].padr} / ${results[i].page} / ${results[i].sex}</p>
+//                                     </div>
+//                                     <ul class="list-item__todo">
+//                                         <li><span>${results[i].todo}</span></li>
+//                                     </ul>
+//                                 </a>
+//                                 <a href="#" class="list-item__tel">전화걸기</a>
+//                             </li>`;
+//                         }
                    
                         
-            }
-            }
+//             }
+//             }
             
-            output += `<!DOCTYPE HTML>
-            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
-            <head>
-            <meta charset="utf-8">
-            <meta name="HandheldFriendly" content="True">
-            <meta name="MobileOptimized" content="320">
-            <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-            <meta name="mobile-web-app-capable" content="yes">	
-            <meta name="apple-mobile-web-app-capable" content="yes">
-            <meta name="apple-mobile-web-app-status-bar-style" content="black">
-            <meta name="format-detection" content="telephone=no">
-            <meta name="Robots" content="ALL" />
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <title>생활관리사 맞춤 서비스</title>
-            <link rel="stylesheet" type="text/css" href="css/style.css">
-            </head>
-            <body>
-            <h1 id="title">생활관리사 맞춤 서비스</h1>
-            
-            
-            <div id="wrap">
-                <div id="gnb">
-                    <h2 id="gnb-title">시니어리</h2>
-                    <button id="gnb-menu"><span>메뉴</span></button>
-                    <ul id="gnb-list">
-                        <li><a href="list1">오늘업무</a></li>
-                        <li><a href="workshare1">인수인계</a></li>
-                        <li><a href="manage1">어르신 관리</a></li>
-                        <li><a href="mypage1">마이페이지</a></li>
-                        <li><a href="/logout">로그아웃</a></li>
-                    </ul>
-                </div>
-                <div id="contents">
-                    <div id="inner">
-                        
-                        <div class="list-myinfo">
-                            <h4 class="list-myinfo__name"><b>${req.session.name}</b> 관리사님<br/>반갑습니다!</h4>				
-                        </div>
-                        <dl class="list-myinfo__list">
-                            <dt>
-                                <h5>오늘 업무</h5>
-                                <p>총 <b>${req.session.workCount + share1.length}</b>건</p>
-                            </dt>
-                            <dd>
-                                <ul>
-                                    <li>
-                                        <a href="fixwork1">
-                                            <h5>고정 업무</h5>
-                                            <p><b>${req.session.workCount}</b>건</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="morework1">
-                                            <h5>추가 업무</h5>
-                                            <p><b>${share1.length}</b>건</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </dd>
-                        </dl>
-            
-            
-                        <div class="list-title">
-                            <h5>고정 업무</h5>
-                            <a href="fixwork1">전체보기</a>
-                        </div>
-                        
-                        <ul class="list-group">
-                         ${list}
-                        </ul>
-            
-            
-            
-                        <div class="list-title">
-                            <h5>추가 업무</h5>
-                            <a href="morework1">전체보기</a>
-                        </div>
-            
-                        <ul class="list-group">
-                            ${list1}
-                        </ul>
-            
-                        <p class="page-copy">Copyright &copy; Dongs All Rights Reserved.</p>
-            
-                    </div><!--  inner -->
-                </div><!--  content -->
-            </div><!--  wrap -->
-            
-            
-            
-            
-            <!-- JS -->
-            <script src="js/jquery-2.2.1.min.js"></script>
-            <script src="js/placeholders.min.js"></script>
-            <script src="js/common.js"></script>
-            <script>
-            
-            </script>
-            </body>
-            </html>
-            `;
 
-        res.send(output);
+
+//         res.send(output);
             
-         });
+//          });
          
        
-    } 
-});
+//     } 
+// });
 
 //고정 업무 버튼 로직
 app.get("/fixwork1", function(req, res){

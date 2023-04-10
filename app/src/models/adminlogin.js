@@ -1,7 +1,7 @@
 const AdminModel = require('./usermodel/admin');
 const admin = new AdminModel();
 
-const adminLoginRequest = async (req, res) => {
+const adminLoginRequest = async (req, res, next) => {
   const adminInfo = await admin.getAdminInfo(req.body);
   const patientList = await admin.getPatientList(adminInfo);
   const session = req.session;
@@ -20,7 +20,7 @@ const adminLoginRequest = async (req, res) => {
   session.info = patientList.info;
   session.workCount = patientList.workCount;
   session.save(() => {
-    res.redirect("/list1");
+    next();
   });
 }
 

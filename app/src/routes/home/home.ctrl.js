@@ -4,9 +4,6 @@ const output = {
     index: (req, res) => {
         res.render("home/index");
     },
-    list: (req, res) => {
-        res.render("home/list");
-    },
     signup: (req, res) => {
         res.render("home/signup");
     },
@@ -42,12 +39,16 @@ const output = {
     },
 };
 
+const process = {
+  list: (req, res) => {
+    res.render("home/list");
+  },
+};
 
 
 
 module.exports = {
-    output
+    output,
+    process
 };
-
-
 

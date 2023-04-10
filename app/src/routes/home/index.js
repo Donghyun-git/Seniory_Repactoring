@@ -9,7 +9,10 @@ const user = require("./user2.ctrl");
 
 // 관리자
 router.get("/", ctrl.output.index);
-router.get("/list", ctrl.output.list);
+
+//로그인 처리 후
+router.post("/", ctrl.process.list);
+
 router.get("/signup", ctrl.output.signup);
 router.get("/calender", ctrl.output.calender);
 router.get("/detail", ctrl.output.detail);
