@@ -1,0 +1,248 @@
+@charset "utf-8";
+@import "default.css";
+@import "animate.min.css";
+@import "common.css";
+@import "font-awesome.css";
+@import "fonts.css";
+
+@font-face {
+    font-family: 'PyeongChangPeace-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+
+/* login, signup */
+#login, #signup {display: table; width: 100%; height: 100%; position: relative;}
+#login-inner {display: table-cell; width: 100%; vertical-align: middle; padding-left: 60px; padding-right: 60px; position: relative;}
+#login-title {text-align: center; padding-top: 240px; background: url('../img/login_ico.png')no-repeat center top / 240px auto;}
+#signup-title { background:none !important}
+#login-title h2, #signup-title h2 {font-family: 'PyeongChangPeace-Bold'; font-size: 36px; line-height: 1.0em; text-align: center;}
+#login-title p, #signup-title p {font-size: 16px; margin-top: 5px; color: #444; text-align: center; }
+#login-form, #signup-form {margin-top: 40px;}
+.login-form__radio {}
+.login-form__radio, .signup-form__radio {height: 30px; position: relative; text-align: center;}
+.login-form__radio:before {content: ''; display: block; width: 60px; height: 30px; background: #f5f5f5; border: solid 1px #eee; box-sizing: border-box; position: absolute; left: 50%; margin-left: -30px; border-radius: 15px;}
+.signup-form__radio:before { content: ''; display: block; width: 60px; height: 30px; background: #f5f5f5; border: solid 1px #eee; box-sizing: border-box; position: absolute; left: 50%; margin-left: -30px; border-radius: 15px;}
+.login-form__radio input[type="radio"], .signup-form__radio input[type="radio"] {display: none;}
+.login-form__radio input[type="radio"] + label, .signup-form__radio input[type="radio"] + label  {margin-left: 0; display: inline-block; height: 30px; line-height: 30px; color: #ccc; position: relative; z-index: 1; -webkit-transition: all 0.3s; transition: all 0.3s;}
+.login-form__radio input[type="radio"]:checked + label, .signup-form__radio input[type="radio"]:checked + label {color: #000;}
+.login-form__radio input[type="radio"]#rdo01 + label, .signup-form__radio input[type="radio"]#rdo01 + label {padding-right: 35px;}
+.login-form__radio input[type="radio"]#rdo02 + label, .signup-form__radio input[type="radio"]#rdo02 + label {padding-left: 35px;}
+.login-form__radio input[type="radio"] ~ .login-form__dots, .signup-form__radio input[type="radio"] ~ .signup-form__dots {display: block; width: 24px; height: 24px; background: #0db565; position: absolute; left: 50%; margin-left: -27px; top: 50%; margin-top: -12px; border-radius: 50%; -webkit-transition: all 0.3s; transition: all 0.3s;}
+.login-form__radio input[type="radio"]#rdo02:checked ~ .login-form__dots, .signup-form__radio input[type="radio"]#rdo02:checked ~ .signup-form__dots {margin-left: 3px;}
+.login-form__select {}
+.login-form__input, .signup-form__input {margin-top: 15px;}
+.login-form__input li { margin-bottom: 4px;}
+
+
+
+.signup-form__input .signup-form__name, .signup-form__input .signup-form__adr { padding: 0 10px 0 0;}
+
+.signup-form__input li span { display: inline-block; font-weight: 700; margin: 5px 0;}
+.signup-form__input .PW_check_label { text-align: right; padding: 3px; font-weight: 500; }
+#signup-button, .go-start button { display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
+
+.login-form__input li {margin-bottom: 5px;}
+.signup-form__input li { margin: 8px 0;}
+.login-form__input li:last-child, .signup-form__input li:last-child {margin-bottom: 0;}
+.login-form__input li input[type="text"],
+.login-form__input li input[type="password"] {display: block; width: 100%;}
+.signup-form__input li input[type="text"] { display: inline-block; width: 100%;}
+.signup-form__input li input[type="password"] {display: inline-block; width: 100%;}
+.login-form__submit, .signup-form__submit {margin-top: 15px;}
+.login-form__submit #login-button, 
+.signup-form__submit #signup-button, #login-button2 {display: block; width: 100%; background: #0db565; color: #fff; height: 50px; line-height: 50px; font-size: 16px; font-weight: 500; border-radius: 4px;}
+.login-form__menu, .signup-form__menu {text-align: center; margin-top: 20px;}
+.login-form__menu li, .signup-form__menu li {display: inline-block; position: relative; padding-right: 12px; margin-right: 10px;}
+.login-form__menu li:after, .signup-form__menu li:after {content: ''; display: block; width: 1px; height: 10px; background: #aaa; position: absolute; right: 0; top: 50%; margin-top: -5px;}
+.login-form__menu li:last-child, .signup-form__menu li:last-child {padding-right: 0; margin-right: 0;}
+.login-form__menu li:last-child:after, .signup-form__menu li:last-child:after {display: none;}
+.login-form__menu li a, .signup-form__menu li a {display: block; font-size: 13px;}
+.login-copy { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.025em; font-weight: 300;}
+
+
+@media (max-width:375px) {
+	#login-title, #signup-title {padding-top: 140px; background-size: 140px auto;}
+	#login-form, #signup-form {margin-top: 20px;}
+	.login-form__select, .signup-form__select {height: 40px;}
+	.login-form__input li input[type="text"],
+	.login-form__input li input[type="password"],
+	.signup-form__input li input[type="text"],
+    .signup-form__input li input[type="password"] {height: 40px;}
+	.login-form__submit, .signup-form__submit {margin-top: 10px;}
+	.login-form__submit button, .signup-form__submit button {height: 44px; line-height: 44px;}
+	.login-copy {bottom: 15px;}
+}
+
+
+
+/* list */
+.list-myinfo {background: #0db565; padding: 85px 20px 90px; margin: -85px -20px 0;}
+.list-myinfo__name {color: #fff; font-size: 30px; font-weight: 300; line-height: 1.2;}
+.list-myinfo__name b {font-weight: 500; font-size: 34px;}
+.list-myinfo__list {background: #fff; border-radius: 20px; padding: 20px; margin-top: -60px; box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.1);}
+.list-myinfo__list dt {border-bottom: solid 1px #e5e5e5; padding-bottom: 15px;}
+.list-myinfo__list dt:after {content: ''; display: table; clear: both;}
+.list-myinfo__list dt h5 {float: left; font-size: 18px; font-weight: 400;}
+.list-myinfo__list dt p {float: right;}
+.list-myinfo__list dt p b {color: #0db565; font-size: 18px; margin-right: 3px;}
+.list-myinfo__list dd {padding-top: 15px;}
+.list-myinfo__list dd ul {margin: 0 -25px;}
+.list-myinfo__list dd ul:after {content: ''; display: table; clear: both;}
+.list-myinfo__list dd ul li {float: left; width: 50%; padding: 0 25px;}
+.list-myinfo__list dd ul li a {display: block; padding-right: 14px; background: url('../img/list_myinfo_arrow.png')no-repeat right center / 4px auto;}
+.list-myinfo__list dd ul li a:after {content: ''; display: table; clear: both;}
+.list-myinfo__list dd ul li a h5 {float: left; font-size: 16px; font-weight: 400;}
+.list-myinfo__list dd ul li a p {float: right;}
+.list-myinfo__list dd ul li a p b {color: #0db565; font-size: 16px; margin-right: 3px;}
+
+.list-title {margin-top: 60px; margin-bottom: 20px;}
+.list-title:after {content: ''; display: table; clear: both;}
+.list-title h5 {font-size: 26px; font-weight: 300; float: left; height: 25px; line-height: 25px;}
+.list-title a {display: block; width: 25px; height: 25px; position: relative; text-indent: -9999px; float: right;}
+.list-title a:before,
+.list-title a:after {content: ''; display: block; background: #333; position: absolute; left: 50%; top: 50%;}
+.list-title a:before {width: 17px; height: 1px; margin-left: -8px;}
+.list-title a:after {width: 1px; height: 17px; margin-top: -8px;}
+
+.list-group {border-top: solid 1px #ddd;}
+.list-item {border-bottom: solid 1px #ddd; position: relative; padding: 15px 60px 15px 0;}
+.list-item__link {display: block; position: relative; padding-left: 100px; min-height: 80px;}
+.list-item__thumb {display: block; width: 80px; height: 80px; border-radius: 20px; position: absolute; left: 0; top: 0;}
+.list-item__text { }
+.list-item__text h5 {padding-top: 7px; font-size: 16px; font-weight: 300;}
+.list-item__text h5 b {font-weight: 500; font-size: 20px; margin-right: 5px; letter-spacing: 0.2em;}
+.list-item__text p {font-size: 13px; color: #666; padding-top:12px;}
+.list-item__todo {margin-top: 6px;}
+.list-item__todo:after {content: ''; display: table; clear: both;}
+.list-item__todo li {float: left; margin-right: 4px;}
+.list-item__todo li:last-child {margin-right: 0;}
+.list-item__todo li span {display: block; padding: 0 10px; height: 24px; line-height: 22px; border: solid 1px #ccc; border-radius: 20px; font-size: 12px;}
+.list-item__tel {display: block; width: 50px; height: 50px; border-radius: 50%; text-indent: -9999px; position: absolute; right: 0; top: 50%; margin-top: -25px; background: url('../img/list_call.png')no-repeat center center / 20px auto; box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.1);}
+
+
+.page-copy {margin-top: 60px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.025em; font-weight: 300;}
+
+/* detail */
+
+.detail-info {padding-top: 10px;}
+.detail-info__thumb {display: block; width: 120px; height: 120px; margin: 0 auto; border-radius: 50%; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
+.detail-info__name {color: #fff; text-align: center; margin-top: 10px;}
+.detail-info__name h5 {font-size: 16px; font-weight: 300;}
+.detail-info__name b {font-weight: 700; font-size: 24px; letter-spacing: 0.2em;}
+.detail-info__name p {font-size: 13px;}
+.detail-info__btn {text-align: center; margin-top: 15px;}
+.detail-info__btn li {display: inline-block; margin: 0 10px;}
+.detail-info__btn li button {background: none; display: block; color: #fff; font-size: 12px;}
+.detail-info__btn li button:before {content: ''; display: block; margin: 0 auto 3px; width: 50px; height: 50px; border-radius: 50%; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
+.detail-info__btn li button.detail-info__call:before {background: #fff url('../img/detail_info_call.png')no-repeat center center / 20px auto;}
+.detail-info__btn li button.detail-info__family:before {background: #fff url('../img/detail_info_family.png')no-repeat center center / 25px auto;}
+.detail-info__btn li button.detail-info__location:before {background: #fff url('../img/detail_info_location.png')no-repeat center center / 25px auto;}
+.detail-info__complete {margin-bottom: -50px; margin-top: 20px;}
+.detail-info__complete button {display: block; margin: 0 auto; width: 140px; height: 44px; line-height: 44px; font-size: 16px; font-weight: 500; background: #fff; color: #0db565; border-radius: 4px; box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);}
+.detail-info__complete button.active {background: #0b834a; color: #fff;}
+
+.detail-title {margin-top: 30px; padding-bottom: 10px; border-bottom: solid 1px #444;}
+.detail-title h5 {font-size: 22px; font-weight: 400;}
+
+.detail-plan {}
+.detail-plan li {border-bottom: solid 1px #e5e5e5; padding: 10px 0;}
+.detail-plan li input[type="checkbox"] {}
+.detail-plan li input[type="checkbox"] + label {font-size: 16px;}
+
+.detail-memo__textarea {display: block; height: 140px; border: solid 1px #ddd; margin-top: 20px;}
+.detail-memo__submit {margin-top: 10px; text-align: right;}
+.detail-memo__submit:after {content: ''; display: table; clear: both;}
+.detail-memo__submit p {float: left; font-size: 12px;}
+.detail-memo__submit p b {}
+.detail-memo__submit button, input[type=submit] {display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; font-size: 14px; font-weight: 500; background: #0db565; color: #fff; border-radius: 4px;}
+
+/* calender */
+.calender .year-month { text-align: center;}
+.calender .year-month span b { font-size: 30px;}
+.calender-tb { width: 100%; height: inherit; text-align: center;} 
+.calender-tb .year { font-size: 18px;}
+.calender-tb .month { font-size: 20px; font-weight: 600;}
+.calender-tb .nav { display: flex; justify-content: space-between; }
+.nav .nav-btn { width: 50px; font-size: 16px; line-height: 34px; border: none; background: none;}
+.nav-btn.go-today { margin-bottom: 10px; width: 80px; font-size: 11px; color:#fff; background-color: #0db565; border-radius: 10px;}
+.calender-tb .days { display: flex; margin: 25px 0 10px;}
+.calender-tb .day { width: calc(100% / 7); text-align: center;}
+.calender-tb .day:first-child { color: rgb(255, 2, 2)}
+.calender-tb .day:last-child { color: rgb(0, 42, 255)}
+.calender-tb .dates { display: flex; flex-flow: row wrap; height: 400px; }
+.calender-tb .date { position: relative; width: calc(100% / 7);  padding-top: 10px; text-align: center; cursor: pointer; transition: all 0.2s;}
+.calender-tb .date .c-1 { opacity: 0; z-index: 1; position: absolute; top: 32px; right: 39px; width: 16px; height: 1px; background-color: rgb(239, 143, 83); transition: all 0.5s;}
+.calender-tb .date:hover > .c-1 {
+	opacity: 1;
+}
+.calender-tb .date:nth-child(7n) { color: rgb(0, 42, 255)}
+.calender-tb .date:nth-child(7n-6) { color: rgb(255, 2, 2)}
+.calender-tb .date .other { opacity: .4;}
+.calender-tb .date .this.today { padding: 4px; border-radius: 20%; background: rgb(242 242 242);}
+
+
+.calender-title { padding-bottom: 10px; border-bottom: solid 1px #444;}
+.calender-title h5 { font-size: 22px; font-weight: 400;}
+.calender-list-box { width: 100%; height: inherit; }
+.calender-plan li { position: relative; border-bottom: solid 1px #e5e5e5; padding: 10px 0; transition: all 0.2s;}
+.calender-plan li span { font-size: 15px;}
+.calender-plan li:before { content:""; width: 20px; height: 1px; position: absolute; top: 22px; right: 10px; background-color: #000; box-sizing: border-box;}
+.calender-plan li:after { content:""; width: 1px; height: 20px; position: absolute; top: 13px; right: 19px; background-color: #000; box-sizing: border-box;}
+
+
+.calender-more-plan li { position: relative; border-bottom: solid 1px #e5e5e5; padding: 10px 0; transition: all 0.2s;}
+.calender-more-plan li span { font-size: 15px;}
+.calender-more-plan li:before { content:""; width: 20px; height: 1px; position: absolute; top: 22px; right: 10px; background-color: #000; box-sizing: border-box;}
+.calender-more-plan li:after { content:""; width: 1px; height: 20px; position: absolute; top: 13px; right: 19px; background-color: #000; box-sizing: border-box;}
+
+@media (max-width:410px){
+	.calender-tb .date .c-1 { opacity: 0; z-index: 1; position: absolute; top: 32px; right: 17px; width: 16px; height: 1px; background-color: rgb(239, 143, 83); transition: all 0.5s;}
+}
+
+
+/* work share */
+.input-area { position: relative; margin-bottom: 3rem; }
+.input-area #input-task { width: 100%; display: inline-block; border: 1px solid gray; -webkit-transition: top 0.2s ease, color 0.2s ease; transition: top 0.2s ease, color 0.2s ease;}
+#input-task + label > span { position: absolute; font-size: 12px; top: 13px; left: 7px; font-weight: 300; color: #8f8f8f; }
+#input-task:focus { outline: none; border-bottom: 1px solid gray; border-left: none; border-top: none; border-right: none; border-radius: 0; padding-top: 55px; padding-bottom: 12px; }
+#input-task:focus + label > span { top: 0px; font-weight: 500; font-size: 14px; color: #333; -webkit-transition: top 0.2s ease, color 0.2s ease; transition: top 0.2s ease, color 0.2s ease;}
+#input-task:focus ~ button { top: 35px; }
+.input-area .search { position: absolute; top: 11px; right: 13px; background-color: #fff; }
+.ws-title {  padding-bottom: 10px; border-bottom: solid 1px #444;}
+.ws-title h5 { font-size: 22px; font-weight: 400;}
+.ws-list-box { width: 100%; height: inherit; text-align: center;}
+.ws-list-box .share { width: 100%; height: 39px; padding: 10px 0; background-color: #0db565; color: #fff; }
+.ws-plan { text-align: left }
+.ws-plan li { position: relative; border-bottom: solid 1px #e5e5e5; padding: 10px 0; transition: all 0.2s; }
+.ws-plan li span { font-size: 15px; }
+
+/* mypage */
+.profile { text-align: center; background: #0db565; margin: -85px -20px 0; padding: 85px 20px 90px;}
+.profile .profile-photo { border-radius: 20%; }
+.profile .profile-photo { margin: 0 auto; display: block; width: 150px; height: 150px; }
+.profile-list { position: relative; text-align: center; background: #fff;border-radius: 20px; padding: 20px; margin-top: -70px; box-shadow: 0px 1px 10px 0px rgb(0 0 0 / 10%);}
+.profile-list dt { position: relative; font-size: 20px; padding-bottom: 17px; }
+.profile-list dt i { position: absolute; top: 7px; left: 0;}
+.profile-list dd { position: relative; font-size: 20px; padding-top: 17px; border-top: 1px solid #e5e5e5e5;}
+.profile-list dd .fa.fa-building-o { position: absolute; top: 24px; left: 0; }
+.profile-list dd .fa.fa-angle-right { position: absolute; top: 24px; right: 0; font-weight: 300;}
+.profile h5 { font-size: 25px; color: #fff; padding-top: 10px;}
+.mypage-list ul { text-align: center;  margin: 10px -20px 0; border-top: 0.1px solid #e5e5e5;}
+.mypage-list ul li { border-bottom: 0.1px solid #e5e5e5;  margin: 0 -20px; padding: 20px;}
+.mypage-list ul li:last-child { border: none; }
+.mypage-list ul li:nth-child(6) { position: relative;}
+.mypage-list ul li:nth-child(6):before { content: "1.0.0"; color: lightgray; font-size: 14px; position: absolute; bottom: 20px; right: 40px;}
+
+/* fix */
+#fix-inner .list-group { border-top: none;}
+
+/* sign up */
+#postcode { margin-bottom: 4px; width: 58%;}
+#find-adr { display: inline-block; background: #0db565; color: #fff; border: none; font-size: 12px; border-radius: 4px; margin-top: -3px; margin-left: 12px; padding: 12px 8px;}
+#address, #detailAddress, #extraAddress { margin-bottom: 4px; width: 100%;}
+#signup-inner {display: table-cell; width: 100%; vertical-align: middle; padding: 60px 60px 100px 60px; position: relative;}
+#signup-form__pname { width: 100%;}

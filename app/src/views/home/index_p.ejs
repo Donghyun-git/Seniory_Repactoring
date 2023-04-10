@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+<meta name="mobile-web-app-capable" content="yes">	
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="Robots" content="ALL" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>생활관리사 맞춤 서비스</title>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+</head>
+<body>
+<h1 id="title">생활관리사 맞춤 서비스</h1>
+
+
+<div id="wrap">
+	<div id="login">
+		<div id="login-inner">
+			<div id="login-title">
+				<h2>Seniory</h2>
+				<p>생활관리사 맞춤 서비스</p>
+			</div>
+			<form action="" method="POST">
+				<div id="login-form">
+					<div class="login-form__radio">
+						<input type="radio" name="rdo" value="관리사" id="rdo01" class="on" onclick="radio(event)" />
+						<label for="rdo01">관리사</label>
+						<input type="radio" name="rdo" value="보호자" id="rdo02" onclick="radio(event)" checked/>
+						<label for="rdo02">보호자</label>
+						<span class="login-form__dots"></span>
+						<div id="rdo_area" style="display:none">관리사</div>
+					</div>
+					<ul class="login-form__input">
+						<li>
+							<select name="center" id="select_center" class="login-form__select">
+								<option value="천안센터">천안센터</option>
+								<option value="아산센터">아산센터</option>
+							</select>
+						</li>
+						<li><input type="text" name="id" id="id" placeholder="아이디를 입력하세요." /></li>
+						<li><input type="password" name="pw" id="pw" placeholder="비밀번호를 입력하세요." /></li>
+					</ul>
+					<div class="login-form__submit">
+						<input type="submit" id="login-button2" value="로그인">
+					</div>
+				</form>
+					<ul class="login-form__menu">
+						<li><a class="sign-up" onclick="crossPage()">회원가입</a></li>
+						<li><a href="#">아이디/비밀번호 찾기</a></li>
+					</ul>
+				</div>			
+		</div>
+		<p class="login-copy">Copyright &copy; Dongs All Rights Reserved.</p>
+	</div>
+</div>
+
+
+<!-- JS -->
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/placeholders.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/index.js" defer></script>
+<script>
+	
+
+</script>
+</body>
+</html>

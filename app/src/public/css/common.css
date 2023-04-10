@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+* {box-sizing: border-box; margin: 0; padding: 0;}
+
+h1#title {position: absolute; width: 0; height: 0; text-indent: -999rem; left: -1000rem; top: -10000rem; overflow: hidden;}
+#skip {position: relative; z-index: 3000;}
+#skip dd {}
+#skip dd a {display: block; position: absolute; top: -3rem; left: 0; padding: 0 10px; height: 3rem; line-height: 3rem; border: 0.1rem solid #ff5700; background: #333; text-align: center; font-family: 'dotum', sans-serif; font-size: 11px; color: #fff;}
+#skip dd a:active,
+#skip dd a:focus{top:0; text-decoration:none; z-index:1000; outline-color: #e84118;}
+
+
+
+/* common */
+html, body {display: block; width: 100%; height: 100%;}
+body {background: #f5f5f5;}
+#wrap {position: relative; width: 100%; max-width: 720px; margin: 0 auto; overflow: hidden; height: 100vh; overflow-y: auto; background: #fff; outline: solid 1px #e5e5e5}
+#contents {padding-top: 55px; position: relative;  -webkit-transition: all 0.4s; transition: all 0.4s;}
+#inner {padding: 30px 20px; position: relative; -webkit-transition: all 0.3s; transition: all 0.3s;}
+#fix-inner, #more-inner {padding: 0 10px; position: relative; -webkit-transition: all 0.3s; transition: all 0.3s;}
+#map-inner { padding: 0;}
+.container {padding-left: 20px; padding-right: 20px; position: relative;}
+.container:after {content: ''; display: table; clear: both;}
+
+
+#gnb {position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #fff; padding: 0 55px; width: 100%; max-width: 720px; margin: 0 auto; box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15);}
+#gnb-back {display: block; width: 55px; height: 55px; position: absolute; left: 0; top: 0; text-indent: -9999px; background: url('../img/gnb_back.png')no-repeat center center / 8px auto;}
+#gnb-title {height: 55px; line-height: 55px; text-align: center; font-size: 20px; font-weight: 500;}
+#gnb-menu {display: block; width: 55px; height: 55px; position: absolute; right: 0; top: 0;}
+#gnb-menu {display: block; width: 50px; height: 54px; float: right; background: none; text-indent: -9999px; padding: 15px 12px;}
+#gnb-menu:before,
+#gnb-menu:after,
+#gnb-menu span {display: block; height: 2px; background: #333; margin-bottom: 6px; transition: all .3s ease-in-out; -webkit-transition: all .3s ease-in-out;}
+#gnb-menu:before {content: '';}
+#gnb-menu:after {content: ''; margin-bottom: 0;}
+#gnb-menu span {text-indent: -9999px;}
+#gnb-menu.on:before {margin-left:0px; transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);}
+#gnb-menu.on span {opacity:0;}
+#gnb-menu.on:after {margin-top:-16px; margin-left:0px; transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);}
+#gnb-list {display: none; top: 55px; bottom: 0; left: 0; right: 0; position: fixed; background: #fff; width: 100%; max-width: 720px; margin: 0 auto; border-top: solid 1px #eee;}
+#gnb-list li {border-bottom: solid 1px #eee;}
+#gnb-list li a {display: block; height: 50px; line-height: 50px; padding: 0 15px;}
+
+
+
+/* Etc */
+.hidden {position: absolute; left: -10000px; top: auto; height: 1px; overflow: hidden;}
+.dib {display: inline-block;}
+.db {display: block !important;}
+.dn {display: none !important;}
+.h100 {height: 100%;}
+.mt0 {margin-top: 0 !important;}
+.mt5 {margin-top: 0.5rem !important;}
+.mt8 {margin-top: 0.8rem !important;}
+.mt10 {margin-top: 1rem !important;}
+.mt15 {margin-top: 1.5rem !important;}
+.mt16 {margin-top: 1.6rem !important;}
+.mt20 {margin-top: 2rem !important;}
+.mt22 {margin-top: 2.2rem !important;}
+.mt24 {margin-top: 2.4rem !important;}
+.mt25 {margin-top: 2.5rem !important;}
+.mt26 {margin-top: 2.6rem !important;}
+.mt30 {margin-top: 3rem !important;}
+.mt40 {margin-top: 4rem !important;}
+.mt50 {margin-top: 5rem !important;}
+.mt60 {margin-top: 6rem !important;}
+.mb60 {margin-bottom: 6rem !important;}
+.mb5 {margin-bottom: 0.5rem !important;}
+.mb10 {margin-bottom: 1rem !important;}
+.pt0 {padding-top: 0 !important;}
+.pb0 {padding-bottom: 0 !important;}
+.pl0 {padding-left: 0 !important;}
+.pr0 {padding-right: 0 !important;}
+.tal {text-align: left !important;}
+.tar {text-align: right !important;}
+.tac {text-align: center !important;}
+.vam {vertical-align: middle !important;}
+.clear {clear:both;}
+.clear:after { content:""; display:block; clear:both;}
+.border-bottom__none {border-bottom: none !important;}
+.border-top__none {border-top: none !important;}
+.mw100{width:100%; max-width: 100%;}
+.border-top__2 {border-top: solid 2px var(--color-light-gray);}
+
+
